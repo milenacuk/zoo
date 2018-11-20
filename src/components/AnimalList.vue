@@ -1,15 +1,25 @@
 <template>
 <div>
     <h2>Add animals</h2>
-    <form @submit.prevent="addAnimal">
+    <form @submit.prevent="addAnimal" class="form-horizontal">
         <label>Sort</label>
         <input v-model="newAnimal.sort" placeholder="Enter sort">
         <label>Name</label>
         <input v-model="newAnimal.name" placeholder="Enter name">
         <label>Date</label>
-        <input v-model="newAnimal.date" placeholder="Enter date">
+        <input v-model="newAnimal.date" placeholder="Enter date"><br>
         <label>Sector</label>
-        <input v-model="newAnimal.sector" placeholder="Enter sector">
+
+
+   <select v-model="newAnimal.sector" class='form-control'>
+       <!-- <option></option> -->
+        <option v-for="(sector,index) in sectors" :key='index' v-bind:value="sector">
+            {{ sector.surface }}            
+        </option> 
+    </select><br>
+    
+
+
         <button>Add animal</button>     
         
     </form>
@@ -31,37 +41,45 @@
                 <td>{{ index + 1 }}</td>
                 <td>{{ animal.sort }}</td>
                 <td>{{ animal.name }}</td>
-                <td> {{!animal.date ? 'nepoznat' : animal.date}}</td>    
-                <td>{{ animal.sector }}</td>
+                <td> {{!animal.date ? 'nepoznat' : animal.date}}</td> 
+                <td>{{ animal.sector.name }}</td>
                 <td> <button @click="removeAnimal(animal)">Delete</button></td>    
                 <td><button @click="onTop(animal)">Move to top</button></td>       
             </tr>
         </tbody>
+     
     </table>
     </center>
 </div>
 </template>
 
 <script>
+const sectors = [
+    { name: 'Water-animal', surface: 'Water'},
+    { name: 'Fawl', surface: 'Kages'},
+    { name: 'Predators', surface: 'Kages'}
+    
+]
 export default {
     data(){
         return{
             animals: [
-                { sort: "konj", name: "Keti" , date: '', sector: 'stala' },
-                { sort: "konj", name: "Keti" , date: '', sector: 'stala' },
-                { sort: "pas", name: "Dzoni" , date: '1-1-2018', sector: 'dvoriste' },
-                { sort: "majmun", name: "Klempo" ,date: '22-7-2016', sector: 'dzungla' },
-                { sort: "macka", name: "Kiki" , date: '15-3-2010', sector: 'ulica' },
-                { sort: "kit", name: "Loki" , date: '6-9-2012', sector: 'okean' },
-                { sort: "pas", name: "Bea" , date: '12-11-2017', sector: 'dvoriste' }
+                { sort: "konj", name: "Keti" , date: '', sector: sectors[0] },
+                { sort: "konj", name: "Keti" , date: '', sector: sectors[0] },
+                { sort: "pas", name: "Dzoni" , date: '1-1-2018', sector: sectors[0] },
+                { sort: "majmun", name: "Klempo" ,date: '22-7-2016', sector: sectors[0] },
+                { sort: "macka", name: "Kiki" , date: '15-3-2010', sector: sectors[0] },
+                { sort: "kit", name: "Loki" , date: '6-9-2012', sector: sectors[0] },
+                { sort: "pas", name: "Bea" , date: '12-11-2017', sector: sectors[0] }
                 
             ],
             newAnimal: {
             sort: '',
             name: '',
             date: '',
-            sector: ''
-        }
+            sector: {}
+        },
+        sectors: sectors
         }
         
     },
@@ -76,6 +94,7 @@ export default {
             this.animals.unshift(animal);
         },
         addAnimal(){
+            // if(this.animal.sector )
             this.animals.push(this.newAnimal);
             this.newAnimal = {};
         }
