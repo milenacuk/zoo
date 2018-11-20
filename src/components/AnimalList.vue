@@ -16,7 +16,7 @@
                 <td>{{ index + 1 }}</td>
                 <td>{{ animal.sort }}</td>
                 <td>{{ animal.name }}</td>
-                <td>{{ animal.date }}</td>               
+                <td> {{!animal.date ? 'nepoznat' : animal.date}}</td>               
             </tr>
         </tbody>
     </table>
@@ -39,6 +39,9 @@ export default {
                 
             ]
         };
+    },
+    methods: {
+
     }
 }
 </script>
