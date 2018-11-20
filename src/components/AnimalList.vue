@@ -8,6 +8,8 @@
         <input v-model="newAnimal.name" placeholder="Enter name">
         <label>Date</label>
         <input v-model="newAnimal.date" placeholder="Enter date">
+        <label>Sector</label>
+        <input v-model="newAnimal.sector" placeholder="Enter sector">
         <button>Add animal</button>     
         
     </form>
@@ -20,7 +22,8 @@
                 <th>Key</th>
                 <th>Sort</th>
                 <th>Name</th>
-                <th>Date</th>                
+                <th>Date</th>  
+                <th>Sector</th>              
             </tr>
         </thead>
         <tbody>
@@ -29,6 +32,7 @@
                 <td>{{ animal.sort }}</td>
                 <td>{{ animal.name }}</td>
                 <td> {{!animal.date ? 'nepoznat' : animal.date}}</td>    
+                <td>{{ animal.sector }}</td>
                 <td> <button @click="removeAnimal(animal)">Delete</button></td>    
                 <td><button @click="onTop(animal)">Move to top</button></td>       
             </tr>
@@ -43,19 +47,20 @@ export default {
     data(){
         return{
             animals: [
-                { sort: "konj", name: "Keti" , date: '' },
-                { sort: "konj", name: "Keti" , date: '' },
-                { sort: "pas", name: "Dzoni" , date: '1-1-2018' },
-                { sort: "majmun", name: "Klempo" ,date: '22-7-2016' },
-                { sort: "macka", name: "Kiki" , date: '15-3-2010' },
-                { sort: "kit", name: "Loki" , date: '6-9-2012' },
-                { sort: "pas", name: "Bea" , date: '12-11-2017' }
+                { sort: "konj", name: "Keti" , date: '', sector: 'stala' },
+                { sort: "konj", name: "Keti" , date: '', sector: 'stala' },
+                { sort: "pas", name: "Dzoni" , date: '1-1-2018', sector: 'dvoriste' },
+                { sort: "majmun", name: "Klempo" ,date: '22-7-2016', sector: 'dzungla' },
+                { sort: "macka", name: "Kiki" , date: '15-3-2010', sector: 'ulica' },
+                { sort: "kit", name: "Loki" , date: '6-9-2012', sector: 'okean' },
+                { sort: "pas", name: "Bea" , date: '12-11-2017', sector: 'dvoriste' }
                 
             ],
             newAnimal: {
             sort: '',
             name: '',
-            date: ''
+            date: '',
+            sector: ''
         }
         }
         
