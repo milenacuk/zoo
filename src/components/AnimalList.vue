@@ -1,5 +1,17 @@
 <template>
 <div>
+    <h2>Add animals</h2>
+    <form @submit.prevent="addAnimal">
+        <label>Sort</label>
+        <input v-model="newAnimal.sort" placeholder="Enter sort">
+        <label>Name</label>
+        <input v-model="newAnimal.name" placeholder="Enter name">
+        <label>Date</label>
+        <input v-model="newAnimal.date" placeholder="Enter date">
+        <button>Add animal</button>     
+        
+    </form>
+
     <h2>Animals</h2>
     <center>
     <table border=1>
@@ -39,8 +51,14 @@ export default {
                 { sort: "kit", name: "Loki" , date: '6-9-2012' },
                 { sort: "pas", name: "Bea" , date: '12-11-2017' }
                 
-            ]
-        };
+            ],
+            newAnimal: {
+            sort: '',
+            name: '',
+            date: ''
+        }
+        }
+        
     },
     methods: {
         removeAnimal(animal){
@@ -51,6 +69,10 @@ export default {
             
             this.removeAnimal(animal);
             this.animals.unshift(animal);
+        },
+        addAnimal(){
+            this.animals.push(this.newAnimal);
+            this.newAnimal = {};
         }
 
     }
