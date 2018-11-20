@@ -50,6 +50,24 @@
      
     </table>
     </center>
+    <h2>Sectors</h2>
+        <center>
+            <table border=1>
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Sector</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(sector,index) in sectors" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ sector.name }}</td>
+                        <td> <button @click="showAnimals(sector)">Show</button></td>  
+                    </tr>
+                </tbody>
+            </table>
+        </center>
 </div>
 </template>
 
@@ -66,10 +84,10 @@ export default {
             animals: [
                 { sort: "konj", name: "Keti" , date: '', sector: sectors[0] },
                 { sort: "konj", name: "Keti" , date: '', sector: sectors[0] },
-                { sort: "pas", name: "Dzoni" , date: '1-1-2018', sector: sectors[0] },
-                { sort: "majmun", name: "Klempo" ,date: '22-7-2016', sector: sectors[0] },
-                { sort: "macka", name: "Kiki" , date: '15-3-2010', sector: sectors[0] },
-                { sort: "kit", name: "Loki" , date: '6-9-2012', sector: sectors[0] },
+                { sort: "pas", name: "Dzoni" , date: '1-1-2018', sector: sectors[1] },
+                { sort: "majmun", name: "Klempo" ,date: '22-7-2016', sector: sectors[2] },
+                { sort: "macka", name: "Kiki" , date: '15-3-2010', sector: sectors[2] },
+                { sort: "kit", name: "Loki" , date: '6-9-2012', sector: sectors[1] },
                 { sort: "pas", name: "Bea" , date: '12-11-2017', sector: sectors[0] }
                 
             ],
@@ -79,7 +97,8 @@ export default {
             date: '',
             sector: {}
         },
-        sectors: sectors
+        sectors: sectors  
+        // ovde sam stavila tu konstantu u objekat
         }
         
     },
@@ -97,6 +116,15 @@ export default {
             // if(this.animal.sector )
             this.animals.push(this.newAnimal);
             this.newAnimal = {};
+        },
+        showAnimals(sector){
+            var animalsToShow = [];
+           this.animals.forEach(function(animal){
+               if(animal.sector.name === sector.name){
+                   animalsToShow.push(animal.name);
+               }
+           });
+           alert(animalsToShow);
         }
 
     }
